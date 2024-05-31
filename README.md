@@ -1,4 +1,4 @@
-# fruitarian-backend
+# freshgrade-backend
 ## Before We Started
 ```
 cp .env.dev.example .env
@@ -11,6 +11,10 @@ yarn install
 or
 ```
 npm intall
+```
+## Init local database in docker
+```
+docker-compose up -d
 ```
 ## Push New Schema in Database
 ```
@@ -27,12 +31,4 @@ npm run dev
 or
 ```
 yarn dev
-```
-## Run Application in Production Mode
-```
-npm run start
-```
-or
-```
-yarn start
 ```
