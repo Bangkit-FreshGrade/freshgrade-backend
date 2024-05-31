@@ -4,7 +4,8 @@
   "description": "Back-End Service for FreshGrade Application",
   "main": "index.js",
   "scripts": {
-    "start": "node src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app",
     "dev": "nodemon src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

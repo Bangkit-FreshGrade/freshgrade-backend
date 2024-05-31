@@ -12,6 +12,7 @@
       "*": ["src/*"]                     /* Path mapping to resolve imports from the 'src' directory */
     },
     "outDir": "./dist",                  /* Redirect output structure to the directory */
+    "rootDir": "./src",
     "sourceMap": true,                    /* Generate corresponding '.map' file */
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
