@@ -1,4 +1,4 @@
-# fruitarian-backend
+# freshgrade-backend
 ## Before We Started
 ```
 cp .env.dev.example .env
@@ -31,12 +31,4 @@ npm run dev
 or
 ```
 yarn dev
-```
-## Run Application in Production Mode
-```
-npm run start
-```
-or
-```
-yarn start
 ```
