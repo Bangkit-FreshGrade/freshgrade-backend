@@ -52,7 +52,7 @@ on:
 
 env:
   PROJECT_ID: freshgrade-bangkit # TODO: update Google Cloud project id
-  SERVICE: freshgrade-backed # TODO: update Cloud Run service name
+  SERVICE: freshgrade-backend # TODO: update Cloud Run service name
   REGION: asia-southeast2 # TODO: update Cloud Run service region
 
 jobs:
