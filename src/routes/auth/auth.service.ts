@@ -5,6 +5,7 @@ import { Tokens } from "../../types/tokens.type";
 import * as argon from "argon2";
 import generateToken from "./token.utils";
 import { User } from "@prisma/client";
+import { UserResponse } from "../../types/userResponse.type";
 
 const checkUnique = async (dto: RegisterDTO) => {
   if (!dto.email || !dto.firstName || !dto.password || !dto.username) {
@@ -121,4 +122,28 @@ export const login = async (dto: LoginDTO): Promise<Tokens> => {
   );
 
   return tokens;
+}
+
+export const getUserDetails = async (id: string): Promise<UserResponse> => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: id
+    },
+    select: {
+      id: true,
+      email: true,
+      hash: false,
+      username: true,
+      firstName: true,
+      lastName: true,
+      createdAt: true,
+      updatedAt: true
+    }
+  })
+
+  if (!user) {
+    throw new HttpException(404, "User not found")
+  }
+
+  return user
 }
