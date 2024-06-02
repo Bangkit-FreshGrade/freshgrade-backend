@@ -33,6 +33,7 @@
     "@types/cors": "^2.8.17",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.12.12",
     "esbuild-register": "^3.5.0",
     "nodemon": "^3.1.0",
