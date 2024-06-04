@@ -35,4 +35,11 @@ model Article {
   uploadDate    DateTime?
   author        String?
   thumbnailUrl  String?
+  type          Fruit
+}
+
+enum Fruit {
+  APPLE
+  MANGO
+  ORANGE
 }
