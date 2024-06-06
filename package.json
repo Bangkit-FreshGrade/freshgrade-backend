@@ -9,6 +9,9 @@
     "dev": "nodemon src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "prisma": {
+    "seed": "node --require esbuild-register src/seed.ts"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Bangkit-FreshGrade/freshgrade-backend.git"

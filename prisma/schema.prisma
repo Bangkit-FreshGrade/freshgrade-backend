@@ -25,3 +25,21 @@ model User {
   lastName  String
   hash      String
 }
+
+model Article {
+  id            String    @id @default(uuid())
+  createdAt     DateTime  @default(now())
+
+  title         String
+  url           String
+  uploadDate    DateTime?
+  author        String?
+  thumbnailUrl  String?
+  type          Fruit
+}
+
+enum Fruit {
+  APPLE
+  MANGO
+  ORANGE
+}
