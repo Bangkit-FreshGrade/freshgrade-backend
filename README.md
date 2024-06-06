@@ -24,6 +24,10 @@ or
 ```
 yarn prisma db push
 ```
+## Seed Database
+```
+npx prisma db seed
+```
 ## Run Application in Development Mode
 ```
 npm run dev
