@@ -6,6 +6,7 @@ import * as argon from "argon2";
 import generateToken from "./token.utils";
 import { User } from "@prisma/client";
 import { UserResponse } from "../../types/userResponse.type";
+import { ChangePasswordDto } from "../../dto/change-password.dto";
 
 const checkUnique = async (dto: RegisterDTO) => {
   if (!dto.email || !dto.firstName || !dto.password || !dto.username) {
@@ -33,11 +34,15 @@ const checkUnique = async (dto: RegisterDTO) => {
     throw new HttpException(422, "Username has already been taken")
   }
 
-  if (dto.password.length < 6) {
+  await validatePassword(dto.username, dto.password)
+}
+
+const validatePassword = async (username: string, password: string) => {
+  if (password.length < 6) {
     throw new HttpException(422, "Password length must be at least 6 characters")
   }
 
-  if (dto.password === dto.username) {
+  if (password === username) {
     throw new HttpException(422, "Password cannot be the same as username")
   }
 }
@@ -146,4 +151,44 @@ export const getUserDetails = async (id: string): Promise<UserResponse> => {
   }
 
   return user
+}
+
+export const changePassword = async (userId: string, dto: ChangePasswordDto): Promise<void> => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId
+    }
+  })
+
+  if (!user) {
+    throw new HttpException(404, "User not found")
+  }
+  
+  const currentPassword = await argon.verify(user.hash, dto.currentPassword)
+  if (!currentPassword) {
+    
+    throw new HttpException(401, "Current password is incorrect")
+  }
+  
+  if (dto.newPassword === dto.currentPassword) {
+    throw new HttpException(400, "New password must be different from the current password")
+  }
+    
+  
+  if (dto.newPassword !== dto.confirmNewPassword) {
+    throw new HttpException(400, "Confirm password is different from your new password")
+  }
+
+  await validatePassword(user.username, dto.newPassword)
+
+  const newHash = await argon.hash(dto.newPassword)
+
+  await prisma.user.update({
+    where: {
+      id: userId
+    },
+    data: {
+      hash: newHash
+    },
+  })
 }
