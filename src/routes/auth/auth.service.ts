@@ -9,7 +9,7 @@ import { UserResponse } from "../../types/userResponse.type";
 import { ChangePasswordDto } from "../../dto/change-password.dto";
 
 const checkUnique = async (dto: RegisterDTO) => {
-  if (!dto.email || !dto.firstName || !dto.password || !dto.username) {
+  if (!dto.email || !dto.firstName || !dto.password || !dto.username || !dto.lastName) {
     throw new HttpException(400, "Missing properties");
     
   }
@@ -21,7 +21,7 @@ const checkUnique = async (dto: RegisterDTO) => {
   })
 
   if (checkEmail) {
-    throw new HttpException(422, "Email has already been taken")
+    throw new HttpException(409, "Email has already been taken")
   }
 
   const checkUsername = await prisma.user.findUnique({
@@ -31,7 +31,7 @@ const checkUnique = async (dto: RegisterDTO) => {
   })
 
   if (checkUsername) {
-    throw new HttpException(422, "Username has already been taken")
+    throw new HttpException(409, "Username has already been taken")
   }
 
   await validatePassword(dto.username, dto.password)
