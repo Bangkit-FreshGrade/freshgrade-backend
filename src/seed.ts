@@ -63,17 +63,220 @@ async function main() {
       author: "Shereen Lehman",
       thumbnailUrl: "https://www.verywellfit.com/thmb/6fQTVDMjHSpNFFkU423-0vUKc9k=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/mango_annotated-42b38e4d9d5345aeb904ab56ab87dbab.jpg",
       type: Fruit.MANGO
-    }
+    },
+    {
+      title: "Health Benefits of Mangoes",
+      url: "https://www.health.com/nutrition/health-benefits-mango",
+      uploadDate: new Date("2023-03-06T00:00:00Z"),
+      author: "Cynthia Sass",
+      thumbnailUrl: "https://images.unsplash.com/photo-1605027990121-cbae9e0642df?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bWFuZ298ZW58MHx8MHx8fDA%3D",
+      type: Fruit.MANGO
+    },
+    {
+      title: "Health Benefits of Mangoes",
+      url: "https://www.webmd.com/diet/health-benefits-mango",
+      uploadDate: new Date("2023-08-08T00:00:00Z"),
+      author: "WebMD Editorial Contributor",
+      thumbnailUrl: "https://img.lb.wbmdstatic.com/vim/live/webmd/consumer_assets/site_images/articles/health_tools/health_benefits_of_mango_slideshow/1800ss_getty_rf_sliced_mango.jpg?resize=750:*",
+      type: Fruit.MANGO
+    },
+    {
+      title: "Mango Nutrition: Tropical Fruit for Helping With Blood Sugar & Brain Health",
+      url: "https://draxe.com/nutrition/mango-nutrition/",
+      uploadDate: new Date("2024-02-05T00:00:00Z"),
+      author: "Rachael Link",
+      thumbnailUrl: "https://draxe.com/wp-content/uploads/2019/04/DrAxeMangoNutritionHeader.jpg",
+      type: Fruit.MANGO
+    },
+  ]
+  const applesArticles = [
+    {
+      title: "10 Impressive Health Benefits of Apples",
+      url: "https://www.healthline.com/nutrition/10-health-benefits-of-apples",
+      uploadDate: new Date("2023-07-12T00:00:00Z"),
+      author: "Ariane Lang",
+      thumbnailUrl: "https://images.ctfassets.net/mrbo2ykgx5lt/31322/f5316c701e9b8fea629c51f3ae29abf2/frontiers-in-plant-science-apples.jpg?&w=1128&fm=webp",
+      type: Fruit.APPLE
+    },
+    {
+      title: "An Apple a Day Keeps the Doctor Away — Fact or Fiction?",
+      url: "https://www.healthline.com/nutrition/an-apple-a-day-keeps-the-doctor-away#benefits",
+      uploadDate: new Date("2020-06-06T00:00:00Z"),
+      author: "Rachael Ajmera",
+      thumbnailUrl: "https://media.baamboozle.com/uploads/images/590771/1653562539_13257_import-url.jpeg",
+      type: Fruit.APPLE
+    },
+    {
+      title: "Will Eating Apples Help If You Have Acid Reflux?",
+      url: "https://www.healthline.com/health/digestive-health/apples-and-acid-reflux",
+      uploadDate: new Date("2024-05-09T00:00:00Z"),
+      author: "Heather Hobbs",
+      thumbnailUrl: "https://media.post.rvohealth.io/wp-content/uploads/2024/04/box-of-juicy-apples-1200x628-facebook.jpg",
+      type: Fruit.APPLE
+    },
+    {
+      title: "Know your tropical fruit- Malay Apple",
+      url: "https://realliferecess.com/know-you-tropical-fruit-malay-apple/",
+      uploadDate: new Date("2022-03-14T00:00:00Z"),
+      author: "Megan Rodden",
+      thumbnailUrl: "https://realliferecess.com/wp-content/uploads/2022/03/IMG_0948.jpg",
+      type: Fruit.APPLE
+    },
+    {
+      title: "5 Health Benefits of Apples",
+      url: "https://www.eatingwell.com/article/17769/5-health-benefits-of-an-apple/",
+      uploadDate: new Date("2024-04-26T00:00:00Z"),
+      author: "Laurie Herr",
+      thumbnailUrl: "https://www.eatingwell.com/thmb/tKuKLufVTywcSHZ2b1T5uYpxPhw=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/apple-peanut-butter-cinnamon-d0713ec01d854a28b52f9df411f999b9.jpeg",
+      type: Fruit.APPLE
+    },
+    {
+      title: "The History of the “Forbidden” Fruit",
+      url: "https://www.nationalgeographic.com/culture/article/history-of-apples",
+      uploadDate: new Date("2014-07-22T00:00:00Z"),
+      author: "Rebecca Rupp",
+      thumbnailUrl: "https://i.natgeofe.com/n/7b94ba9f-8eb3-4a6b-91e9-1ca331db5da4/2734949408_9ef81bac09_z.jpg?w=1280&h=854",
+      type: Fruit.APPLE
+    },
+    {
+      title: "Are apples good for diabetes?",
+      url: "",
+      uploadDate: new Date("2023-01-10T00:00:00Z"),
+      author: "Jon Johnson",
+      thumbnailUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAameYTVejpTWK-vzSCKJomldtpJaga5bLrA&s",
+      type: Fruit.APPLE
+    },
+    {
+      title: "Apple Nutrition Facts and Health Benefits",
+      url: "https://www.verywellfit.com/apples-nutrition-facts-calories-and-their-health-benefits-4117992",
+      uploadDate: new Date("2024-05-16T00:00:00Z"),
+      author: "Jonathan Valdez",
+      thumbnailUrl: "https://www.verywellfit.com/thmb/Dq6CC8KuxqaOrKEKxpHM5ppv0yg=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/apples_annotated-4bd499eed8a64824b5f61b5aec853d78.jpg",
+      type: Fruit.APPLE
+    },
+    {
+      title: "Red Delicious",
+      url: "https://medium.com/@mysweettoothgoal/apple-fruit-are-most-beloved-and-well-known-fruit-in-the-world-f51afd7c4f9e",
+      uploadDate: new Date("2023-06-12T00:00:00Z"),
+      author: "Fauzia Khan",
+      thumbnailUrl: "https://miro.medium.com/v2/resize:fit:600/format:webp/0*Y22XGmfvQaHYK6xw.png",
+      type: Fruit.APPLE
+    },
+    {
+      title: "What to know about apples",
+      url: "https://www.medicalnewstoday.com/articles/267290#summary",
+      uploadDate: new Date("2023-11-21T00:00:00Z"),
+      author: "Yvette Brazier",
+      thumbnailUrl: "https://hips.hearstapps.com/hmg-prod/images/apples-at-farmers-market-royalty-free-image-1627321463.jpg?crop=0.796xw:1.00xh;0.103xw,0&resize=640:*",
+      type: Fruit.APPLE
+    },
+
+
+  ]
+    const orangeArticles = [
+      {
+      title: "What to know about oranges",
+      url: "https://www.medicalnewstoday.com/articles/272782",
+      uploadDate: new Date("2023-07-18T00:00:00Z"),
+      author: "Megan Ware",
+      thumbnailUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4NOD3IhLnNA87rF10Q_ypVfebRAEs6bZyFg&s",
+      type: Fruit.ORANGE
+      },
+      {
+      title: "Oranges: Nutrients, Benefits, Juice, and More",
+      url: "https://www.healthline.com/nutrition/oranges",
+      uploadDate: new Date("2023-04-20T00:00:00Z"),
+      author: "Jillian Kubala",
+      thumbnailUrl: "https://images.pexels.com/photos/461415/pexels-photo-461415.jpeg?cs=srgb&dl=pexels-pixabay-461415.jpg&fm=jpg",
+      type: Fruit.ORANGE
+      },
+      {
+      title: "Is Orange Juice Good or Bad for You?",
+      url: "https://www.healthline.com/nutrition/orange-juice",
+      uploadDate: new Date("2023-07-05T00:00:00Z"),
+      author: "Marsha Mcculloch",
+      thumbnailUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx8dD6zAMt9Pp2s1WTKhzGxK3UsnFCFfnGvw&s",
+      type: Fruit.ORANGE
+      },
+      {
+      title: "5 Surprising Health Benefits of Orange Juice",
+      url: "https://www.healthline.com/nutrition/orange-juice-benefits",
+      uploadDate: new Date("2023-08-29T00:00:00Z"),
+      author: "Rachael Ajmera",
+      thumbnailUrl: "https://cdn.britannica.com/94/131094-050-8687A599/blossom-fruit-orange.jpg",
+      type: Fruit.ORANGE
+      },
+      {
+      title: "7 Reasons to Eat More Citrus Fruits",
+      url: "https://www.healthline.com/nutrition/citrus-fruit-benefits",
+      uploadDate: new Date("2023-07-11T00:00:00Z"),
+      author: "Kerri-Ann Jennings",
+      thumbnailUrl: "https://plus.unsplash.com/premium_photo-1667443200845-2cf024ef46c6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8b3JhbmdlJTIwZnJ1aXR8ZW58MHx8MHx8fDA%3D",
+      type: Fruit.ORANGE
+      },
+      {
+      title: "9 Types of Oranges to Try",
+      url: "https://www.health.com/types-of-oranges-8410794",
+      uploadDate: new Date("2024-01-08T00:00:00Z"),
+      author: "Johna Burdeos",
+      thumbnailUrl: "https://www.health.com/thmb/17kyLFjc_Tx3M-jU2WjNPxXmLJ4=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/TypesOfOranges-f95153e786554ba5b6da0370387ee563.jpg",
+      type: Fruit.ORANGE
+      },
+      {
+      title: "The global orange juice crisis is caused by disease and bad weather",
+      url: "https://theconversation.com/the-global-orange-juice-crisis-is-caused-by-disease-and-bad-weather-heres-how-to-keep-it-on-the-breakfast-table-231645",
+      uploadDate: new Date("2024-06-07T15:28:00Z"),
+      author: "Jas Kalra",
+      thumbnailUrl: "https://images.theconversation.com/files/598846/original/file-20240605-17-7l8po6.jpg?ixlib=rb-4.1.0&q=45&auto=format&w=754&h=503&fit=crop&dpr=1",
+      type: Fruit.ORANGE
+      },
+      {
+      title: "Health Benefits of Oranges",
+      url: "https://www.webmd.com/diet/health-benefits-oranges",
+      uploadDate: new Date("2022-11-27T00:00:00Z"),
+      author: "WebMD Editorial Contributors",
+      thumbnailUrl: "",
+      type: Fruit.ORANGE
+      },
+      {
+      title: "Health Benefits of Oranges",
+      url: "https://www.health.com/food/health-benefits-oranges",
+      uploadDate: new Date("2023-03-29T00:00:00Z"),
+      author: " Cynthia Sass",
+      thumbnailUrl: "https://www.health.com/thmb/9nsTGcBM-Oln1lL2OTzhCSkuIj8=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Health-Stocksy_txp5e95690asrw300_Medium_934585-e870449543284eed8aa4be52fc09a4ed.jpg",
+      type: Fruit.ORANGE
+      },
+      {
+      title: "health Benefits of Oranges",
+      url: "https://timesofindia.indiatimes.com/life-style/health-fitness/diet/why-you-should-eat-oranges/articleshow/4662391.cms",
+      uploadDate: new Date("2022-04-11T03:59:00Z"),
+      author: "Vishwa Purohit",
+      thumbnailUrl: "https://static.toiimg.com/thumb/msid-4662399,imgsize-13900,width-400,resizemode-4/4662399.jpg",
+      type: Fruit.ORANGE
+      },
+      {
+      title: "Oranges 101: A Complete Guide",
+      url: "https://www.everydayhealth.com/diet-and-nutrition/oranges/guide/",
+      uploadDate: new Date("2024-01-11T00:00:00Z"),
+      author: "Kristeen Cherney",
+      thumbnailUrl: "https://images.everydayhealth.com/images/diet-nutrition/oranges-101-a-complete-guide-alt-1440x810.jpg?sfvrsn=50ad0a19_7",
+      type: Fruit.ORANGE
+    },
+
+
   ]
 
-  for (let index = 0; index < mangoesArticles.length; index++) {
+for (let index = 0; index < mangoesArticles.length; index++) {
     await prisma.article.create({
-      data: {
-        ...mangoesArticles[index]
-      }
-    })
-    
-  }
+      data: mangoesArticles[index]
+    });
+    await prisma.article.create({
+      data: applesArticles[index]
+    });
+    await prisma.article.create({
+      data: orangeArticles[index]
+    });
+}
 
   // Create user
   const user = await prisma.user.findUnique({
