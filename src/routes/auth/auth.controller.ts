@@ -57,4 +57,20 @@ router.get('/user', authVerification, async (req: Request, res: Response) => {
   }
 })
 
+/**
+ * Change password
+ */
+router.patch('/change-password', authVerification, async (req: Request, res: Response) => {
+  try {
+    const userId = req.params.id
+    await AuthService.changePassword(userId, {...req.body})
+    res.status(200).json()
+  } catch (error: any) {
+    res.status(error.errorCode).json({
+      code: error.errorCode,
+      message: error.message
+    })
+  }
+})
+
 export default router;
