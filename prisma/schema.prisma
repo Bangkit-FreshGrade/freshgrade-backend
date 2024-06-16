@@ -17,17 +17,33 @@ model User {
   firstName String
   lastName  String
   hash      String
+
+  history Scan[]
 }
 
 model Article {
-  id           String    @id @default(uuid())
-  createdAt    DateTime  @default(now())
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
   title        String
   url          String
   uploadDate   DateTime?
   author       String?
   thumbnailUrl String?
   type         Fruit
+}
+
+model Scan {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  fruit    String
+  value    Float?
+  disease  String?
+  imageUrl String?
+
+  createdById String?
+  createdBy   User?   @relation(fields: [createdById], references: [id], onDelete: Cascade)
 }
 
 enum Fruit {
