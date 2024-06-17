@@ -4,6 +4,8 @@ import axios from "axios";
 import { inputImage } from "../../types/inputImage.type"
 import HttpException from "../../model/http-exception.model"
 import prisma from "../../plugins/prisma/prisma.service";
+import { Storage } from "@google-cloud/storage";
+import { Scan } from "@prisma/client";
 
 export const postPredict = async (userId: string, image: Express.Multer.File) => {
   const user = await prisma.user.findUnique({
@@ -56,9 +58,12 @@ export const postPredict = async (userId: string, image: Express.Multer.File) =>
     throw new HttpException(error.response.status, error.response.statusText)
   }
 
+  const publicUrl = await uploadImage(userId, image)
+  
   const resultObj = await prisma.scan.create({
     data: {
       ...result,
+      imageUrl: publicUrl,
       createdBy: {
         connect: {
           id: userId
@@ -115,7 +120,50 @@ const handleDiseasePrediction = (predictions: number[]) => {
   return value * 100 > 80 ? CLASSIFICATION[index] : "No disease found"
 }
 
-// TODO: handle upload img to gcs
-const uploadImage = async (userId: string, image: Express.Multer.File) => {
+const uploadImage = async (userId: string, image: Express.Multer.File): Promise<string> => {
+  const storage = new Storage()
+  const bucket = storage.bucket("freshgrade-scan-result")
   
+  const newFileName = `${Date.now()}-${image.originalname}`
+  const storagePath = `${userId}/${newFileName}`
+
+  const blob = bucket.file(storagePath)
+  const blobStream = blob.createWriteStream({
+    resumable: false,
+    contentType: image.mimetype,
+  })
+
+  return new Promise((resolve, reject) => {
+    blobStream.on("error", (err) => {
+      reject(new HttpException(500, err.message))
+    })
+
+    blobStream.on("finish", () => {
+      const publicUrl = `https://storage.googleapis.com/${bucket.name}/${storagePath}`
+      resolve(publicUrl)
+    })
+
+    blobStream.end(image.buffer)
+  })
 }
+
+export const getUserHistory = async (userId: string): Promise<Scan[]> => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId
+    }
+  })
+
+  if (!user) {
+    throw new HttpException(404, "User not found")
+  }
+
+  const history = await prisma.scan.findMany({
+    where: {
+      createdBy: user
+    }
+  })
+
+  return history
+}
+
