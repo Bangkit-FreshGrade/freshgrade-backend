@@ -5,6 +5,7 @@ import { inputImage } from "../../types/inputImage.type"
 import HttpException from "../../model/http-exception.model"
 import prisma from "../../plugins/prisma/prisma.service";
 import { Storage } from "@google-cloud/storage";
+import { Scan } from "@prisma/client";
 
 export const postPredict = async (userId: string, image: Express.Multer.File) => {
   const user = await prisma.user.findUnique({
@@ -119,7 +120,6 @@ const handleDiseasePrediction = (predictions: number[]) => {
   return value * 100 > 80 ? CLASSIFICATION[index] : "No disease found"
 }
 
-// TODO: handle upload img to gcs
 const uploadImage = async (userId: string, image: Express.Multer.File): Promise<string> => {
   const storage = new Storage()
   const bucket = storage.bucket("freshgrade-scan-result")
@@ -145,5 +145,25 @@ const uploadImage = async (userId: string, image: Express.Multer.File): Promise<
 
     blobStream.end(image.buffer)
   })
+}
+
+export const getUserHistory = async (userId: string): Promise<Scan[]> => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId
+    }
+  })
+
+  if (!user) {
+    throw new HttpException(404, "User not found")
+  }
+
+  const history = await prisma.scan.findMany({
+    where: {
+      createdBy: user
+    }
+  })
+
+  return history
 }
 

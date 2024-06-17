@@ -55,8 +55,23 @@ router.post('/predict', authVerification, async (req: Request, res: Response, ne
     }
 
     const result = await ScannerService.postPredict(userId, image)
-    // TODO: handle predict result
+    
     res.json(result)
+  } catch (error: any) {
+    res.status(error.errorCode).json({
+      code: error.errorCode,
+      message: error.message
+    })
+  }
+})
+
+router.get('/history', authVerification, async (req: Request, res: Response) => {
+  try {
+    const userId = req.params.id
+  
+    const history = await ScannerService.getUserHistory(userId)
+  
+    res.json(history)
   } catch (error: any) {
     res.status(error.errorCode).json({
       code: error.errorCode,
