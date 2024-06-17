@@ -4,6 +4,7 @@ import axios from "axios";
 import { inputImage } from "../../types/inputImage.type"
 import HttpException from "../../model/http-exception.model"
 import prisma from "../../plugins/prisma/prisma.service";
+import { Storage } from "@google-cloud/storage";
 
 export const postPredict = async (userId: string, image: Express.Multer.File) => {
   const user = await prisma.user.findUnique({
@@ -56,9 +57,12 @@ export const postPredict = async (userId: string, image: Express.Multer.File) =>
     throw new HttpException(error.response.status, error.response.statusText)
   }
 
+  const publicUrl = await uploadImage(userId, image)
+  
   const resultObj = await prisma.scan.create({
     data: {
       ...result,
+      imageUrl: publicUrl,
       createdBy: {
         connect: {
           id: userId
@@ -116,6 +120,30 @@ const handleDiseasePrediction = (predictions: number[]) => {
 }
 
 // TODO: handle upload img to gcs
-const uploadImage = async (userId: string, image: Express.Multer.File) => {
+const uploadImage = async (userId: string, image: Express.Multer.File): Promise<string> => {
+  const storage = new Storage()
+  const bucket = storage.bucket("freshgrade-scan-result")
   
+  const newFileName = `${Date.now()}-${image.originalname}`
+  const storagePath = `${userId}/${newFileName}`
+
+  const blob = bucket.file(storagePath)
+  const blobStream = blob.createWriteStream({
+    resumable: false,
+    contentType: image.mimetype,
+  })
+
+  return new Promise((resolve, reject) => {
+    blobStream.on("error", (err) => {
+      reject(new HttpException(500, err.message))
+    })
+
+    blobStream.on("finish", () => {
+      const publicUrl = `https://storage.googleapis.com/${bucket.name}/${storagePath}`
+      resolve(publicUrl)
+    })
+
+    blobStream.end(image.buffer)
+  })
 }
+
