@@ -143,7 +143,7 @@ freshgrade-backend
 
 
 
-## Lincense
+## License
 
 This Project is licensed under the MIT License - see the [LICENSE](https://github.com/Bangkit-FreshGrade/freshgrade-backend/blob/main/LICENSE) file for details.
 
