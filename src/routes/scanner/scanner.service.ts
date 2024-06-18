@@ -138,13 +138,13 @@ const handleDiseasePrediction = (predictions: number[], fruit: string) => {
   let disease: string
   let description: string | null
 
-  // set threshold into 80%
+  // set threshold into 90%
   if (value * 100 > 90) {
     // match the disease with the fruit
     if (Math.floor(index/3) == FRUIT_INDEX[fruit]) {
       disease = CLASSIFICATION[index]
       description = DESCRIPTION[index]
-      
+
       return {
         disease,
         description
