@@ -49,10 +49,11 @@ export const postPredict = async (userId: string, image: Express.Multer.File) =>
   try {
     const diseaseResponse = await axios.post(`${base_url}/predict/disease`, request)
     const diseases: number[] = diseaseResponse.data.predictions[0]
-    const diseaseResult = handleDiseasePrediction(diseases)
+    const diseaseResult = handleDiseasePrediction(diseases, result.fruit)
     result = {
       ...result,
-      disease: diseaseResult
+      disease: diseaseResult.disease,
+      desc: diseaseResult.description
     }
   } catch (error: any) {
     throw new HttpException(error.response.status, error.response.statusText)
@@ -101,11 +102,29 @@ const handleFreshCondition = (predictions: number[]) => {
   }
 }
 
-const handleDiseasePrediction = (predictions: number[]) => {
-  const CLASSIFICATION = ["Blotch", "Rot", "Scab", 
-                          "Anthracnose", "Black Mould Rot", "Stem end Rot",
-                          "Blackspot", "Canker"
-                        ];
+const handleDiseasePrediction = (predictions: number[], fruit: string) => {
+  const CLASSIFICATION = [
+    "Blotch", "Rot", "Scab", 
+    "Anthracnose", "Black Mould Rot", "Stem end Rot",
+    "Blackspot", "Canker"
+  ];
+
+  const FRUIT_INDEX = {
+    "Apple": 0,
+    "Mango": 1,
+    "Orange": 2
+  }
+
+  const DESCRIPTION = [
+    "Fungal disease that results in unsightly dark spots on apple leaves and fruits, potentially leading to defoliation and reduced fruit quality.",
+    "Condition where apple fruits develop soft, decayed areas, which can spread rapidly, especially in moist conditions, making the fruit inedible.",
+    "Common apple disease characterized by dark, scabby lesions on leaves and fruits, leading to blemishes and deformities that affect the apple's appearance and marketability.",
+    "Prevalent fungal disease in mangoes, causing dark lesions on various parts of the plant, significantly impacting fruit quality and yield.",
+    "Disease that manifests as a black, powdery mold on mango fruits, which can result in internal decay and reduced fruit quality.",
+    "Post-harvest disease that affects the stem end of mango fruits, leading to dark lesions and fruit rot, impacting storage and marketability.",
+    "Fungal disease causing hard, dark spots on the rind of oranges, which affects the fruit's appearance and can lead to market rejection.",
+    "Bacterial disease that causes raised, corky lesions on various parts of the orange tree, leading to defoliation, fruit drop, and reduced tree health and productivity."
+  ]
   
   let value = predictions[0]
   let index = 0;
@@ -115,9 +134,27 @@ const handleDiseasePrediction = (predictions: number[]) => {
       index = i
     }
   }
-  
+
+  let disease: string
+  let description: string | null
+
   // set threshold into 80%
-  return value * 100 > 80 ? CLASSIFICATION[index] : "No disease found"
+  if (value * 100 > 90) {
+    // match the disease with the fruit
+    if (Math.floor(index/3) == FRUIT_INDEX[fruit]) {
+      disease = CLASSIFICATION[index]
+      description = DESCRIPTION[index]
+      
+      return {
+        disease,
+        description
+      }
+    }
+  }
+  return {
+    disease: "No disease found",
+    description: null
+  }
 }
 
 const uploadImage = async (userId: string, image: Express.Multer.File): Promise<string> => {
