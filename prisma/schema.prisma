@@ -41,6 +41,7 @@ model Scan {
   value    Float?
   disease  String?
   imageUrl String?
+  desc     String?
 
   createdById String?
   createdBy   User?   @relation(fields: [createdById], references: [id], onDelete: Cascade)
